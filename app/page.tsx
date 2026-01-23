@@ -1,6 +1,6 @@
 import Guest from "@/components/Guest";
 import { currentUser } from "@clerk/nextjs/server";
-
+import Dashboard from "@/components/Dashboard";
 
 
 const HomePage = async () => {
@@ -11,11 +11,7 @@ const HomePage = async () => {
   }
 
   
-  return (
-    <main>
-        <h1>Expense Tracker</h1>
-    </main>
-  )
+  return <Dashboard userName={user.firstName || "User"} />;
 };
 
 export default HomePage;

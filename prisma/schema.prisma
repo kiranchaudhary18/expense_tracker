@@ -32,3 +32,55 @@ model Transaction {
 
   @@index([userId])
 }
+
+model Group {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members     GroupMember[]
+  transactions Transaction[]
+}
+
+model GroupMember {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  groupId   String
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, groupId])
+}
+
+model ExpenseSplit {
+  id          String   @id @default(uuid())
+  amount      Float
+
+  transactionId String
+  transaction  Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+model RecurringExpense {
+  id          String   @id @default(uuid())
+  text        String
+  amount      Float
+  frequency   String
+  startDate   DateTime
+  endDate     DateTime?
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}

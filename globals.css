@@ -1,0 +1,23 @@
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .header {
+    font-size: 18px;
+  }
+
+  .transaction-list {
+    font-size: 14px;
+  }
+
+  .form {
+    width: 100%;
+  }
+}
